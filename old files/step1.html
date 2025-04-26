@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>My page</title>
+   
+  </head>
+  <body>
+    <!-- Dropdown menu for selecting tool -->
+    <select id="tool" style="display: block; margin-bottom: 10px;">
+      <option value="black" selected>Black stone</option>
+      <option value="white">White stone</option>
+      <option value="SQ">Square</option>
+      <option value="TR">Triangle</option>
+      <option value="CR">Circle</option>
+      <option value="remove">Remove</option>
+    </select>
+    <div id="board">
+      <img src="https://github.com/Igobum/Tsumego-adventures/blob/main/Go%20app%20assets/ChatGPT%20Image%20Apr%2020%2C%202025%2C%2009_52_03%20AM.png" alt="board" "width:100px">
+
+<script>
+board.addEventListener("click", function(x, y) {
+    if(tool.value == "black") {
+        board.addObject({
+            x: x,
+            y: y,
+            c: WGo.B
+        });
+    }
+    else if(tool.value == "white") {
+        board.addObject({
+            x: x,
+            y: y,
+            c: WGo.W
+        });
+    }
+    else if(tool.value == "remove") {
+        board.removeObjectsAt(x, y);
+   
+    else {
+        board.addObject({
+            x: x,
+            y: y,
+            type: tool.value
+        });
+    }
+});
+</script>
+var coordinates = {
+    grid: {
+        draw: function(args, board) {
+            var ch, t, xright, xleft, ytop, ybottom;
+            
+            this.fillStyle = "rgba(0,0,0,0.7)";
+            this.textBaseline="middle";
+            this.textAlign="center";
+            this.font = board.stoneRadius+"px "+(board.font || "");
+            
+            xright = board.getX(-0.75);
+            xleft = board.getX(board.size-0.25);
+            ytop = board.getY(-0.75);
+            ybottom = board.getY(board.size-0.25);
+            
+            for(var i = 0; i < board.size; i++) {
+                ch = i+"A".charCodeAt(0);
+                if(ch >= "I".charCodeAt(0)) ch++;
+                
+                t = board.getY(i);
+                this.fillText(board.size-i, xright, t);
+                this.fillText(board.size-i, xleft, t);
+                
+                t = board.getX(i);
+                this.fillText(String.fromCharCode(ch), t, ytop);
+                this.fillText(String.fromCharCode(ch), t, ybottom);
+            }
+            
+            this.fillStyle = "black";
+		}
+    }
+}
+board.addCustomObject(coordinates);
+
+var board = new WGo.Board(document.getElementById("board"), {
+    width: 900,
+    section: {
+        top: 24,
+        left: 12,
+        right: -0.5,
+        bottom: -0.5
+    }
+});
+
+
+	    </div>
+
+  </body>
+</html>

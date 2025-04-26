@@ -1,0 +1,16 @@
+var board = new WGo.Board(document.getElementById("board"), {
+    width: 600,
+});
+However we would like to see only a part of the board, so we call constructor with parameter section.
+
+
+
+var board = new WGo.Board(document.getElementById("board"), {
+    width: 600,
+    section: {
+        top: 12,
+        left: 6,
+        right: -0.5,
+        bottom: -0.5
+    }
+});
